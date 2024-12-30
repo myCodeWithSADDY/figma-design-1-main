@@ -1,7 +1,9 @@
 
 import React from 'react'
 import { Box, Typography, Container } from "@mui/material";
-import { styled } from "@mui/system";
+import { fontSize, styled, useMediaQuery, useTheme } from "@mui/system";
+
+
 
 
 const data = [
@@ -43,7 +45,10 @@ const ContentWrapper = styled(Container)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   [theme.breakpoints.down('md')]: {
-    padding: theme.spacing(2), // Adjust padding on smaller screens
+    padding: theme.spacing(2),
+    display: 'flex',
+    justifyContent: 'center', // Adjust padding on smaller screens
+    alignItems: 'center',
   },
   justifyContent: "space-between",
   padding: theme.spacing(4)
@@ -55,7 +60,7 @@ const MainText = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(2),
   fontWeight: 700,
   [theme.breakpoints.down('sm')]: {
-    fontSize: '1rem',
+    fontSize: '2rem',
   },
   textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)"
 }));
@@ -67,19 +72,22 @@ const EmailText = styled(Typography)(({ theme }) => ({
 }));
 
 const Hero = () => {
+const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+const isPad = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <HeroWrapper>
       <ContentWrapper>
         
             {data.map(item => (
-                <Box key={item.id} sx={{ mt: "auto", mb: "auto", maxWidth:'50%' }}>
+                <Box key={item.id} sx={{ fontSize: isMobile || isPad? "4rem" : '2rem',  mt: "auto", mb: "auto", maxWidth:'50%' }}>
                 <MainText variant="h2" gutterBottom>
                 {item.title}
               </MainText>
-              <MainText variant="h5" sx={{color:'#FFEA00'}}>
+              <MainText variant="h5" sx={{color:'#FFEA00', fontSize: isMobile || isPad? "3rem" : '2rem',}}>
               {item.description}
             </MainText>
-              <MainText variant="subtext"  fontSize={'1rem'} >
+              <MainText variant="subtext" sx={{display: isMobile? "none" : "block" }} fontSize={'1rem'} >
               {item.subhead}
             </MainText>
             </Box>

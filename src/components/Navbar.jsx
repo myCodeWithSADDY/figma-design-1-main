@@ -21,21 +21,19 @@ import { navData } from "../../Utils/DataSeeders"; // Adjust the path based on y
 import NotificationDialog from "./dialogs/NotificationDialog";
 
 const Navbar = () => {
-  const [anchorEl, setAnchorEl] = useState(null); // For dropdown menu
-  const [dropdownId, setDropdownId] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null); // For dropdown menu anchor
+  const [openDropdown, setOpenDropdown] = useState(null); // Tracks currently open dropdown menu
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [isNotification, setIsNotification] = useState(false);
-  const [menu, setMenu] = useState(null); // To manage the anchor for the notification
-  const anchor = useRef(null); // Reference for the notification button
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const notificationAnchor = useRef(null); // Reference for notification button
 
   const toggleNotification = (e) => {
-    setIsNotification(!isNotification);
-    setMenu(e.currentTarget); // Set the notification icon as the anchor element
+    setIsNotificationOpen((prev) => !prev); // Toggle notification dialog visibility
+    setAnchorEl(e.currentTarget); // Set anchor for the notification dialog
   };
 
   const handleCloseMenu = () => {
-    setAnchorEl(null);
-    setDropdownId(null);
+    setOpenDropdown(null); // Close the dropdown menu
   };
 
   const toggleDrawer = (open) => {
@@ -47,6 +45,7 @@ const Navbar = () => {
   const isPad = useMediaQuery(theme.breakpoints.down("md"));
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  // Function to render the navigation links
   const renderNavLinks = () => {
     return navData.map((item) => (
       <React.Fragment key={item.id}>
@@ -55,15 +54,15 @@ const Navbar = () => {
           <Box>
             <Button
               endIcon={<ExpandMore />}
-              onClick={(e) => handleOpenMenu(e, item.id)}
+              onClick={(e) => setOpenDropdown(item.id)} // Open specific dropdown
               sx={{ textTransform: "none", color: "White" }}
             >
               {item.label}
             </Button>
             {/* Dropdown Menu */}
             <Menu
-              anchorEl={menu}
-              open={dropdownId === item.id}
+              anchorEl={anchorEl}
+              open={openDropdown === item.id}
               onClose={handleCloseMenu}
             >
               {item.options.map((option, index) => (
@@ -71,7 +70,6 @@ const Navbar = () => {
                   key={index}
                   component={Link}
                   to={option.route}
-                  color="white"
                   onClick={handleCloseMenu}
                 >
                   {option.label}
@@ -93,7 +91,7 @@ const Navbar = () => {
   };
 
   const closeNotificationDialog = () => {
-    setIsNotification(false); // Close notification dialog
+    setIsNotificationOpen(false); // Close notification dialog
   };
 
   return (
@@ -126,13 +124,13 @@ const Navbar = () => {
           {/* Navbar Section */}
           <Grid
             item
-            xs={isMobile || isPad ? 8 : 8} // Adjust width for mobile and tablet screens
+            xs={isMobile || isPad ? 10 : 8}
             sx={{
-              backgroundColor: "#876CE8",
+              backgroundColor: isMobile || isPad ? "#E4FBC4" : "#876CE8"  ,
               padding: "0.5rem",
               borderRadius: "1rem",
               display: "flex",
-              justifyContent: isMobile || isPad ? "flex-start" : "center", // Align left for mobile/tablet
+              justifyContent: isMobile || isPad ? "flex-end" : "center",
               alignItems: "center",
               gap: 3,
             }}
@@ -141,7 +139,7 @@ const Navbar = () => {
             {(isMobile || isPad) && (
               <IconButton
                 onClick={() => toggleDrawer(true)}
-                sx={{ color: "white" }}
+                sx={{ color: isMobile || isPad ? "black" : "white"  }}
               >
                 <MenuIcon />
               </IconButton>
@@ -152,23 +150,24 @@ const Navbar = () => {
           </Grid>
 
           {/* Notification Icon Section */}
-          <Grid item xs={2} textAlign="right">
-            {(isPad || !isMobile) && ( // Notification visible on tablets and desktops
+          <Grid item xs={2} textAlign="right" sx={{ display: isMobile ? "none" : "block" }}>
+            {(isPad || !isMobile) && (
               <IconButton
                 onClick={toggleNotification}
-                ref={anchor} // Attach the ref to the icon
+                ref={notificationAnchor}
+                sx={{ display: isMobile || isPad?  'none' : "block"}} // Attach the ref to the icon
               >
-                <Notifications sx={{ color: "#876CE8" }} />
+                <Notifications sx={{ color: "#876CE8",  }} />
               </IconButton>
             )}
           </Grid>
         </Grid>
 
         {/* Notification Dialog - Attached to the Notification Icon */}
-        {isNotification && (
+        {isNotificationOpen && (
           <NotificationDialog
             closehandler={closeNotificationDialog}
-            anchorEl={menu} // Attach the menu (notification icon) as the anchor element
+            anchorEl={notificationAnchor.current} // Attach the ref to the dialog
           />
         )}
 
