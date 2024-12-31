@@ -58,6 +58,7 @@ const Sideinfo = () => {
                   padding: "0.5rem",
                   display: "flex",
                   flexDirection: "column",
+                  height: '30vh'
                 }}
               >
                 <Typography

@@ -100,11 +100,12 @@ const Navbar = () => {
         width: "100%",
         bgcolor: "#E4FBC4",
         borderBottom: "1px solid #ddd",
+       
         py: 2,
       }}
     >
       <Container>
-        <Grid container alignItems="center" justifyContent="space-between">
+        <Grid container  alignItems="center"  justifyContent='space-evenly' >
           {/* Logo Section */}
           <Grid item xs={2}>
             <Typography
@@ -115,6 +116,7 @@ const Navbar = () => {
                 textDecoration: "none",
                 color: "black",
                 fontWeight: "bold",
+                
               }}
             >
               Logo
@@ -150,12 +152,12 @@ const Navbar = () => {
           </Grid>
 
           {/* Notification Icon Section */}
-          <Grid item xs={2} textAlign="right" sx={{ display: isMobile ? "none" : "block" }}>
+          <Grid item xs={2} sx={{ display: isMobile ? "none" : "flex",  justifyContent: 'flex-end'  }}>
             {(isPad || !isMobile) && (
               <IconButton
                 onClick={toggleNotification}
                 ref={notificationAnchor}
-                sx={{ display: isMobile || isPad?  'none' : "block"}} // Attach the ref to the icon
+                sx={{ display: isMobile || isPad?  'none' : "flex"}} // Attach the ref to the icon
               >
                 <Notifications sx={{ color: "#876CE8",  }} />
               </IconButton>
@@ -172,7 +174,7 @@ const Navbar = () => {
         )}
 
         {/* Mobile and Tablet Drawer for Navigation Links */}
-        <Drawer anchor="left" open={drawerOpen} onClose={() => toggleDrawer(false)}>
+        <Drawer anchor="right" open={drawerOpen} onClose={() => toggleDrawer(false)}>
           <Box
             sx={{ width: 250, padding: 2 }}
             role="presentation"
