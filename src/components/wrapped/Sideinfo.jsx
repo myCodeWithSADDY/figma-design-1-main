@@ -53,6 +53,7 @@ const Sideinfo = () => {
 
               {/* Content Section */}
               <CardContent
+              
                 sx={{
                   flexGrow: 1,
                   padding: "0.5rem",
@@ -98,7 +99,7 @@ const Sideinfo = () => {
       />
 
       {/* Sidebar List */}
-      <Box sx={{ bgcolor: "#B7C5E3", padding: "1rem" }}>
+      <Box sx={{ bgcolor: "#B7C5E3", padding: "1rem",  }}>
         <Grid container spacing={2}>
           {/* Render Categories with Headings */}
           {[

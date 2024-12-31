@@ -22,18 +22,25 @@ import NotificationDialog from "./dialogs/NotificationDialog";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null); // For dropdown menu anchor
-  const [openDropdown, setOpenDropdown] = useState(null); // Tracks currently open dropdown menu
+  const [openDropdown, setOpenDropdown] = useState(false); // Tracks dropdown open/close state
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const notificationAnchor = useRef(null); // Reference for notification button
 
+  // Toggle dropdown visibility
+  const handleMenuOpen = (e) => {
+    setAnchorEl(e.currentTarget); // Set the anchorEl to the clicked button
+    setOpenDropdown(true); // Open dropdown
+  };
+
+  const handleMenuClose = () => {
+    setOpenDropdown(false); // Close dropdown
+    setAnchorEl(null); // Reset the anchorEl
+  };
+
   const toggleNotification = (e) => {
     setIsNotificationOpen((prev) => !prev); // Toggle notification dialog visibility
     setAnchorEl(e.currentTarget); // Set anchor for the notification dialog
-  };
-
-  const handleCloseMenu = () => {
-    setOpenDropdown(null); // Close the dropdown menu
   };
 
   const toggleDrawer = (open) => {
@@ -54,7 +61,7 @@ const Navbar = () => {
           <Box>
             <Button
               endIcon={<ExpandMore />}
-              onClick={(e) => setOpenDropdown(item.id)} // Open specific dropdown
+              onClick={handleMenuOpen} // Open specific dropdown
               sx={{ textTransform: "none", color: "White" }}
             >
               {item.label}
@@ -62,15 +69,23 @@ const Navbar = () => {
             {/* Dropdown Menu */}
             <Menu
               anchorEl={anchorEl}
-              open={openDropdown === item.id}
-              onClose={handleCloseMenu}
+              open={openDropdown}
+              onClose={handleMenuClose} // Close the menu
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
             >
               {item.options.map((option, index) => (
                 <MenuItem
                   key={index}
                   component={Link}
                   to={option.route}
-                  onClick={handleCloseMenu}
+                  onClick={handleMenuClose}
                 >
                   {option.label}
                 </MenuItem>
@@ -100,12 +115,11 @@ const Navbar = () => {
         width: "100%",
         bgcolor: "#E4FBC4",
         borderBottom: "1px solid #ddd",
-       
         py: 2,
       }}
     >
       <Container>
-        <Grid container  alignItems="center"  justifyContent='space-evenly' >
+        <Grid container alignItems="center" justifyContent="space-evenly">
           {/* Logo Section */}
           <Grid item xs={2}>
             <Typography
@@ -116,7 +130,6 @@ const Navbar = () => {
                 textDecoration: "none",
                 color: "black",
                 fontWeight: "bold",
-                
               }}
             >
               Logo
@@ -128,7 +141,7 @@ const Navbar = () => {
             item
             xs={isMobile || isPad ? 10 : 8}
             sx={{
-              backgroundColor: isMobile || isPad ? "#E4FBC4" : "#876CE8"  ,
+              backgroundColor: isMobile || isPad ? "#E4FBC4" : "#876CE8",
               padding: "0.5rem",
               borderRadius: "1rem",
               display: "flex",
@@ -141,7 +154,7 @@ const Navbar = () => {
             {(isMobile || isPad) && (
               <IconButton
                 onClick={() => toggleDrawer(true)}
-                sx={{ color: isMobile || isPad ? "black" : "white"  }}
+                sx={{ color: isMobile || isPad ? "black" : "white" }}
               >
                 <MenuIcon />
               </IconButton>
@@ -152,14 +165,14 @@ const Navbar = () => {
           </Grid>
 
           {/* Notification Icon Section */}
-          <Grid item xs={2} sx={{ display: isMobile ? "none" : "flex",  justifyContent: 'flex-end'  }}>
+          <Grid item xs={2} sx={{ display: isMobile ? "none" : "flex", justifyContent: "flex-end" }}>
             {(isPad || !isMobile) && (
               <IconButton
                 onClick={toggleNotification}
                 ref={notificationAnchor}
-                sx={{ display: isMobile || isPad?  'none' : "flex"}} // Attach the ref to the icon
+                sx={{ display: isMobile || isPad ? "none" : "flex" }} // Attach the ref to the icon
               >
-                <Notifications sx={{ color: "#876CE8",  }} />
+                <Notifications sx={{ color: "#876CE8" }} />
               </IconButton>
             )}
           </Grid>

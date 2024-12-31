@@ -18,12 +18,17 @@ const App = () => {
     <BrowserRouter>
       {/* Navbar - stays on top */}
       <Navbar />
-      <HeroSection/>
-      <WrappedComponent/>
+      
 
      
           
             <Routes>
+              <Route path="/" element={
+                <>
+                <HeroSection />
+                <WrappedComponent/>
+                </>
+                } />
               <Route path="/home" element={<Home />} />
               <Route path="/all-tests" element={<AllTests />} />
               <Route path="/subject" element={<Subject />} />
