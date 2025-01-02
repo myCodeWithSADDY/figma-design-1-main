@@ -15,6 +15,7 @@ import React from "react";
 import { subject } from "../../../Utils/Data";
 import { blogs } from "../../../Utils/DataSeeders";
 import { useNavigate } from "react-router-dom";
+import Blogs from "../navbar/Blogs";
 
 const papers = [
   {
@@ -40,7 +41,7 @@ const papers = [
 ];
 
 const Subject = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1, p: 2 }}>
       {/* Subject Section */}
@@ -58,16 +59,14 @@ const Subject = () => {
               }}
             >
               <CardActionArea
-              onClick={()=>navigate(subject.route)}
+                onClick={() => navigate(subject.route)}
                 sx={{
                   display: "flex",
                   flexDirection: "column",
                   height: "100%", // Match card height
                   justifyContent: "center",
                   alignItems: "center",
-                }
-              
-              }
+                }}
               >
                 {/* Smaller Image */}
                 <CardMedia
@@ -162,39 +161,10 @@ const Subject = () => {
       </Grid>
 
       {/* Blogs Section */}
-      <Grid container spacing={3} sx={{ mt: 5 }}>
-        <Grid item xs={12}>
-          <Typography variant="h4" sx={{ mb: 2, textAlign: "center" }}>
-            Blogs
-          </Typography>
-        </Grid>
-        {blogs.map((blog) => (
-          <Grid item xs={12} sm={6} key={blog.id}>
-           <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        sx={{ height: 140 }}
-        image={blog.image}
-        title="green iguana"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {blog.title}
-        </Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {blog.description}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
-          </Grid>
-        ))}
-      </Grid>
+
+      <Blogs />
     </Box>
   );
 };
-
 
 export default Subject;

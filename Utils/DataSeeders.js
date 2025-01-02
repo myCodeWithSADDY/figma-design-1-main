@@ -12,7 +12,7 @@ export const navData = [
     },
     {
         id: 1,
-        label: 'All Tests',
+        label: 'Tests',
         route: '/all-tests',
         isDropDown: true,
         icon: '<Expand/>',
@@ -49,7 +49,7 @@ export const navData = [
     },
     {
         id: 4,
-        label: 'Past Papers',
+        label: 'Papers',
         route: '/past-papers',
         isDropDown: false,
     },
@@ -67,10 +67,34 @@ export const navData = [
     },
     {
         id: 7,
-        label: 'Contact Us',
-        route: '/contact-us',
+        label: 'Contact',
+        route: '/contact',
         isDropDown: false,
     },
+]
+
+export const test =[
+  {
+    id: 1,
+    label: "PPSC 2024",
+    description: "Prepare for PPSC 2024 exams with these practice questions.",
+    route: "/test1",
+    icon: "��",
+  },
+  {
+    id: 2,
+    label: "CSS 2023",
+    description: "Review the CSS 2023 exams with practice questions.",
+    route: "/test1",
+    icon: "��",
+  },
+  {
+    id: 3,
+    label: "HTML 2023",
+    description: "Review the HTML 2023 exams with practice questions.",
+    route: "/test1",
+    icon: "��",
+  }
 ]
 
 export const Sidebar = {
@@ -79,14 +103,14 @@ export const Sidebar = {
         id: 1,
         title: "PPSC 2024 MCQs",
         description: "Prepare for PPSC 2024 exams with these multiple-choice questions.",
-        route: "/mcqs/ppsc-2024",
+        route: "/mcqs",
         icon: "📘",
       },
       {
         id: 2,
         title: "PPSC 2023 MCQs",
         description: "Review the MCQs from PPSC 2023 exams.",
-        route: "/mcqs/ppsc-2023",
+        route: "/mcqs",
         icon: "📗",
       },
     ],
@@ -95,14 +119,14 @@ export const Sidebar = {
         id: 1,
         title: "PPSC 2024 Past Papers",
         description: "Access PPSC 2024 past papers for in-depth preparation.",
-        route: "/past-papers/ppsc-2024",
+        route: "/past-papers",
         icon: "📚",
       },
       {
         id: 2,
         title: "CSS 2023 Past Papers",
         description: "Study CSS 2023 past papers to understand question patterns.",
-        route: "/past-papers/css-2023",
+        route: "/past-papers",
         icon: "📘",
       },
     ],

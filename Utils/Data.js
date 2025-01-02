@@ -31,3 +31,38 @@ export const subject = [
         route: '/subject/geography',
     },
 ]
+
+const mcqData = [
+    {
+        id: 1,
+        question: 'What is the chemical symbol for water?',
+        options: ['H2O', 'O2', 'CO2', 'NaCl'],
+        answer: 'H2O'
+    },
+    {
+        id: 2,
+        question: 'Which planet is known as the Red Planet?',
+        options: ['Earth', 'Mars', 'Jupiter', 'Saturn'],
+        answer: 'Mars'
+    },
+    {
+        id: 3,
+        question: 'What is the capital of France?',
+        options: ['Berlin', 'Madrid', 'Paris', 'Rome'],
+        answer: 'Paris'
+    },
+    {
+        id: 4,
+        question: 'Who wrote "To Kill a Mockingbird"?',
+        options: ['Harper Lee', 'Mark Twain', 'Ernest Hemingway', 'F. Scott Fitzgerald'],
+        answer: 'Harper Lee'
+    },
+    {
+        id: 5,
+        question: 'What is the largest ocean on Earth?',
+        options: ['Atlantic Ocean', 'Indian Ocean', 'Arctic Ocean', 'Pacific Ocean'],
+        answer: 'Pacific Ocean'
+    }
+];
+
+export default mcqData;

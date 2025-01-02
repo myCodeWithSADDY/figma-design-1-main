@@ -16,7 +16,11 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import { ExpandMore, Notifications, Menu as MenuIcon } from "@mui/icons-material";
+import {
+  ExpandMore,
+  Notifications,
+  Menu as MenuIcon,
+} from "@mui/icons-material";
 import { navData } from "../../Utils/DataSeeders"; // Adjust the path based on your file structure
 import NotificationDialog from "./dialogs/NotificationDialog";
 
@@ -165,7 +169,14 @@ const Navbar = () => {
           </Grid>
 
           {/* Notification Icon Section */}
-          <Grid item xs={2} sx={{ display: isMobile ? "none" : "flex", justifyContent: "flex-end" }}>
+          <Grid
+            item
+            xs={2}
+            sx={{
+              display: isMobile ? "none" : "flex",
+              justifyContent: "flex-end",
+            }}
+          >
             {(isPad || !isMobile) && (
               <IconButton
                 onClick={toggleNotification}
@@ -187,7 +198,11 @@ const Navbar = () => {
         )}
 
         {/* Mobile and Tablet Drawer for Navigation Links */}
-        <Drawer anchor="right" open={drawerOpen} onClose={() => toggleDrawer(false)}>
+        <Drawer
+          anchor="right"
+          open={drawerOpen}
+          onClose={() => toggleDrawer(false)}
+        >
           <Box
             sx={{ width: 250, padding: 2 }}
             role="presentation"
