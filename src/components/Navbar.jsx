@@ -204,7 +204,7 @@ const Navbar = () => {
           onClose={() => toggleDrawer(false)}
         >
           <Box
-            sx={{ width: 250, padding: 2 }}
+            sx={{ width: 250, padding: 1 }}
             role="presentation"
             onClick={() => toggleDrawer(false)}
             onKeyDown={() => toggleDrawer(false)}
